@@ -1,42 +1,30 @@
-package com.company;
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Main {
 
+    public interface Command {
+        public void execute();
+    }
+
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter Text: ");
-        String text = in.nextLine();
-        final String sentences[] = text.split("[.!?]\\s*");
 
-        final String words[][] = new String[sentences.length][];
+        boolean debug = false;
 
-        for (int i = 0; i < sentences.length; ++i) {
-            words[i] = sentences[i].split("[\\p{Punct}\\s]+");
+        if(args.length < 1|| args.length > 2 && !args[0].equalsIgnoreCase("echo" )){
+            WorkPart z = new WorkPart();
+            z.execute();
+            }
+
+        else if(args[0].equalsIgnoreCase("debug") || args[0].equalsIgnoreCase("-d"))
+        {
+            Debug a = new Debug();
+            a.execute();
         }
 
-        System.out.println(Arrays.deepToString(words));
-        int i = 0, j = 0;
-        int n = 0;
-        int a = 0;
-        int b = 0;
-
-        while (j < text.length()) {
-            while (text.charAt(i) != ' ') {
-                i++;
-            }
-            b = i;
-            if (text.charAt(a) == text.charAt(b - 1))
-
-                for (int k = a; k <= b - 1; k++) {
-                    System.out.print(text.charAt(k));
-                    if (k == b - 1)
-                        System.out.println();
-                }
-            a = b + 1;
-            j = b + 1;
-            i++;
+        else if(args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("-h"))
+        {
+            Help b = new Help();
+            b.execute();
+            WorkPart z = new WorkPart();
+            z.execute();
         }
     }
 }
